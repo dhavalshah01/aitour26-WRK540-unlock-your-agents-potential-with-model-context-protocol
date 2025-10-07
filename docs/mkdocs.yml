@@ -23,7 +23,6 @@ nav:
       - Lab 1 Agent Instructions: lab-1-agent-instructions.md
       - Lab 2 Start your Agent: lab-2-start-the-agent.md
       - Lab 3 Semantic Search: lab-3-mcp-semantic-search.md
-      - Lab 4 Securing Agent Data: lab-4-secure-agent-data.md
   - Observability Labs:
       - Observability Overview: observability-overview.md
       - Lab 5 Service Monitoring: lab-5-monitoring.md
@@ -34,6 +33,7 @@ nav:
   - Summary: summary.md
   - Resources: resources.md
   - Bonus content:
+      - Securing Agent Data: lab-4-secure-agent-data.md
       - Local Tracing with Aspire: lab-7-local-tracing-with-aspire.md
   - About: about.md
 
