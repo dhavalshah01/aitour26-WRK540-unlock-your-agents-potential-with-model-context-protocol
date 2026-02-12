@@ -11,14 +11,14 @@ Write-Host "Creating agent workshop resources in resource group: rg-$RESOURCE_PR
 $DEPLOYMENT_NAME = "azure-ai-agent-service-lab-$(Get-Date -Format 'yyyyMMddHHmmss')"
 
 Write-Host "Starting Azure deployment..."
-az deployment sub create \
-  --name "$DEPLOYMENT_NAME" \
-  --location "$RG_LOCATION" \
-  --template-file main.bicep \
-  --parameters @main.parameters.json \
-  --parameters location="$RG_LOCATION" \
-  --parameters resourcePrefix="$RESOURCE_PREFIX" \
-  --parameters uniqueSuffix="$UNIQUE_SUFFIX" \
+az deployment sub create `
+  --name "$DEPLOYMENT_NAME" `
+  --location "$RG_LOCATION" `
+  --template-file main.bicep `
+  --parameters main.parameters.json `
+  --parameters location="$RG_LOCATION" `
+  --parameters resourcePrefix="$RESOURCE_PREFIX" `
+  --parameters uniqueSuffix="$UNIQUE_SUFFIX" `
   --output json | Out-File -FilePath output.json -Encoding utf8
 
 if ($LASTEXITCODE -ne 0) {
@@ -115,9 +115,9 @@ $objectId = az ad signed-in-user show --query id -o tsv
 
 Write-Host "Ensuring Azure AI Developer role assignment..."
 try {
-    $roleResult = az role assignment create \
-      --role "Azure AI Developer" \
-      --assignee "$objectId" \
+    $roleResult = az role assignment create `
+      --role "Azure AI Developer" `
+      --assignee "$objectId" `
       --scope "/subscriptions/$subId/resourceGroups/$RESOURCE_GROUP_NAME/providers/Microsoft.CognitiveServices/accounts/$AI_FOUNDRY_NAME" 2>&1
     if ($LASTEXITCODE -eq 0) {
         Write-Host "✅ Azure AI Developer role assignment created successfully."
@@ -136,16 +136,16 @@ try {
 }
 
 Write-Host "Ensuring Azure AI User role assignment..."
-$roleResultUser = az role assignment create \
-  --assignee "$objectId" \
-  --role "Azure AI User" \
+$roleResultUser = az role assignment create `
+  --assignee "$objectId" `
+  --role "Azure AI User" `
   --scope "/subscriptions/$subId/resourceGroups/$RESOURCE_GROUP_NAME"
 Write-Host "Role assignment result: $roleResultUser"
 
 Write-Host "Ensuring Azure AI Project Manager role assignment..."
-$roleResultManager = az role assignment create \
-  --assignee "$objectId" \
-  --role "Azure AI Project Manager" \
+$roleResultManager = az role assignment create `
+  --assignee "$objectId" `
+  --role "Azure AI Project Manager" `
   --scope "/subscriptions/$subId/resourceGroups/$RESOURCE_GROUP_NAME"
 Write-Host "Role assignment result: $roleResultManager"
 
